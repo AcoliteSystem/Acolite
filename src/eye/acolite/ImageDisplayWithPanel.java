@@ -205,6 +205,5 @@ public class ImageDisplayWithPanel extends ImageDisplay
         if (point.y <  this.panelTop || point.y > this.panelTop + h)
             return false;
         return true;
-    }
-    
+    } 
 }

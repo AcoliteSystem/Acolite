@@ -51,6 +51,5 @@ public class MainWindow extends javax.swing.JDialog {
     public void setPanel(Image panel) {
         this.imageDisplayWithPanel.setPanel(panel);
         this.repaint();
-    }
-    
+    } 
 }

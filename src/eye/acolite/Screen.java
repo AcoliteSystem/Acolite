@@ -173,4 +173,5 @@ final class Screen {
         }
         this.screenshotImage = null;
     }
+    
 }

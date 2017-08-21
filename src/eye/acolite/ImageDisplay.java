@@ -87,5 +87,4 @@ public class ImageDisplay extends JComponent {
     public boolean isOpaque() {
         return true;
     }
-
 }
