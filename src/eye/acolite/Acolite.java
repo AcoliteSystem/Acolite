@@ -76,6 +76,10 @@ public class Acolite
      */
     private JDialog aboutDialog = null;
     /**
+     * The My Deficiency dialog.
+     */
+    private JDialog myDeficiencyDialog = null;
+    /**
      * The simulator does the actual simulation work.
      */
     private Simulator simulator = new Simulator();
@@ -104,9 +108,13 @@ public class Acolite
      */
     private MenuItem aboutMenuItem = new MenuItem();
     /**
-     * A menu item for D-15 dichotomous test that will be added to the tray menu.
+     * The D-15 dichotomous test menu item that will be added to the tray menu.
      */
     private MenuItem dichotomousTestMenuItem = new MenuItem();
+    /**
+     * The My Deficiency test menu item that will be added to the tray menu.
+     */
+    private MenuItem myDeficiencyMenuItem = new MenuItem();
     
     private long timeOfLastClickOnTrayIcon = 0;
     private long timeOfLastFocusLost = 0;
@@ -330,7 +338,7 @@ public class Acolite
 
         menu.setLabel("PopupMenu");
         
-        
+
         // D-15 dichotomous test
         dichotomousTestMenuItem.setLabel("Take D-15 dichotomous test");
         dichotomousTestMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -354,6 +362,19 @@ public class Acolite
 
         });
         menu.add(dichotomousTestMenuItem);
+        
+        
+        myDeficiencyMenuItem.setLabel("My Deficiency..");
+        myDeficiencyMenuItem.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myDeficiencyActionPerformed(evt);
+            }
+        });
+        menu.add(myDeficiencyMenuItem);
+        
+        menu.addSeparator();
 
         // normal vision
         normalMenuItem.setLabel("Normal Vision");
@@ -371,8 +392,7 @@ public class Acolite
         });
         menu.add(normalMenuItem);
 
-        // deutan vision
-        menu.addSeparator();
+        // deutan vision 
         deutanMenuItem.setLabel("Deuteranopia (Common)");
         deutanMenuItem.addItemListener(new java.awt.event.ItemListener() {
 
@@ -752,6 +772,25 @@ public class Acolite
         }
         aboutDialog.setVisible(true);
     }
+    
+    private void myDeficiencyActionPerformed(java.awt.event.ActionEvent evt) {
+
+        // hide the simulation window. Otherwise the about dialog would cover 
+        // the simulation window and capture events, which is bad if the user
+        // clicks the button that starts the default web browser. The simulation
+        // windows would remain visible and be covered by the web browser.
+        this.switchToNormalVision();
+
+        if (this.myDeficiencyDialog == null) {
+            this.myDeficiencyDialog = new javax.swing.JDialog();
+            myDeficiencyDialog.setTitle("Simulate Calculated Deficiency");
+            myDeficiencyDialog.getContentPane().add(new MyDeficiency(), BorderLayout.CENTER);
+            myDeficiencyDialog.setResizable(false);
+            myDeficiencyDialog.pack();
+            myDeficiencyDialog.setLocationRelativeTo(null);// center the frame
+        }
+        myDeficiencyDialog.setVisible(true);
+    }
 
     /**
      * Event handler for the Save menu item. Saves the current simulation to
@@ -831,9 +870,13 @@ public class Acolite
 
             this.updateMenuState();
 
-            // hide the about dialog before taking a screenshot
+            // hide dialogs before taking a screenshot
             if (this.aboutDialog != null) {
                 this.aboutDialog.setVisible(false);
+            }
+            
+            if (this.myDeficiencyDialog != null) {
+                this.myDeficiencyDialog.setVisible(false);
             }
 
             // take a screenshot, simulate and show the result

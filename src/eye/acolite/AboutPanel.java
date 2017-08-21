@@ -5,9 +5,6 @@
 
 package eye.acolite;
 
-import java.awt.Desktop;
-import java.net.URI;
-import javax.swing.JButton;
 
 /**
  * About panel for Color Oracle.

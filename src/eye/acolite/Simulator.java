@@ -145,7 +145,7 @@ public class Simulator {
                     // scale the matrix values to 0..2^15 for integer computations 
                     // of the simulated protan values.
                     // divide after the computation by 2^15 to rescale.
-                    // also divide by 2^15 and multiply by 2^8 to scale the linear rgb to 0..255
+                    // also divide by 2^15 asnd multiply by 2^8 to scale the linear rgb to 0..255
                     // total division is by 2^15 * 2^15 / 2^8 = 2^22
                     // shift the bits by 22 places instead of dividing
                     int r_blind = (int) (k1 * r_lin + k2 * g_lin) >> 22;
