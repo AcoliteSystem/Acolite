@@ -1,6 +1,7 @@
 package com.muchsoft.util;
 
 /**
+ * TEEEEEEEEH
  * <p>This class lets you determine which system your Java application runs on. Furthermore, it offers
  * methods for cross-platform queries for certain paths such as the preferences folder. It is used as
  * follows:
