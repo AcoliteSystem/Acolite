@@ -113,7 +113,7 @@ public class ImageDisplayWithPanel extends ImageDisplay
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        this.acolite.switchToNormalVision();
+        //this.acolite.switchToNormalVision();
     }
 
     @Override
@@ -124,7 +124,6 @@ public class ImageDisplayWithPanel extends ImageDisplay
             this.dragging = true;
         } else {
             this.dragging = false;
-            this.acolite.switchToNormalVision();
         }
     }
 
@@ -133,7 +132,6 @@ public class ImageDisplayWithPanel extends ImageDisplay
         if (this.dragging) {
             this.dragging = false;
         } else {
-            this.acolite.switchToNormalVision();
         }
     }
 
