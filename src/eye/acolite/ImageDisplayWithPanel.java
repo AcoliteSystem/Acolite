@@ -5,7 +5,7 @@
  *
  */
 
-package ika.colororacle;
+package eye.acolite;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

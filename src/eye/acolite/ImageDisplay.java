@@ -5,7 +5,7 @@
  *
  */
 
-package ika.colororacle;
+package eye.acolite;
 
 import java.awt.Dimension;
 import java.awt.Graphics;

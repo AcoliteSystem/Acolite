@@ -4,7 +4,7 @@
  * Created on February 5, 2007, 1:55 PM
  */
 
-package ika.colororacle;
+package eye.acolite;
 
 import java.awt.Image;
 
@@ -15,7 +15,7 @@ import java.awt.Image;
  */
 public class MainWindow extends javax.swing.JDialog {
     
-    private ika.colororacle.ImageDisplayWithPanel imageDisplayWithPanel;
+    private eye.acolite.ImageDisplayWithPanel imageDisplayWithPanel;
 
     /** Creates new form MainWindow */
     public MainWindow(java.awt.Frame parent, boolean modal, ColorOracle colorOracle) {

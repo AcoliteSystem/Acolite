@@ -1,6 +1,6 @@
-package ika.colororacle;
+package eye.acolite;
 
-import com.muchsoft.util.Sys;
+import com.acolite.util.Sys;
 import java.awt.AWTException;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;

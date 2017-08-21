@@ -4,9 +4,9 @@
  * Created on February 4, 2007, 10:20 PM
  *
  */
-package ika.colororacle;
+package eye.acolite;
 
-import com.muchsoft.util.Sys;
+import com.acolite.util.Sys;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
