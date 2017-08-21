@@ -87,8 +87,8 @@ final class Screen {
         return simulationWindow.getImage();
     }
 
-    private void createSimulationWindow(ColorOracle colorOracle) {
-        this.simulationWindow = new MainWindow(null, false, colorOracle);
+    private void createSimulationWindow(Acolite acolite) {
+        this.simulationWindow = new MainWindow(null, false, acolite);
 
         // add event listeners that will hide the window when a key is pressed,
         // or when the window looses focus.
@@ -97,10 +97,10 @@ final class Screen {
         // Therefore the mouse wheel event listener is attached to a child of
         // the MainWindow (the ContentPane).
         // Note: mouse events are handled by ImageDisplayWithPanel
-        this.simulationWindow.addKeyListener(colorOracle);
-        this.simulationWindow.addWindowListener(colorOracle);
-        this.simulationWindow.addFocusListener(colorOracle);
-        this.simulationWindow.getContentPane().addMouseWheelListener(colorOracle);
+        this.simulationWindow.addKeyListener(acolite);
+        this.simulationWindow.addWindowListener(acolite);
+        this.simulationWindow.addFocusListener(acolite);
+        this.simulationWindow.getContentPane().addMouseWheelListener(acolite);
 
         //System.out.println("Window: " + this.getUsableScreenArea());
 
@@ -143,11 +143,11 @@ final class Screen {
     }
 
     public void showSimulationImage(BufferedImage simulationImage, 
-            ColorOracle colorOracle, Image panel) {
+            Acolite acolite, Image panel) {
 
         // don't create a window if there is already one visible
         if (this.simulationWindow == null) {
-            this.createSimulationWindow(colorOracle);
+            this.createSimulationWindow(acolite);
         }
         this.simulationWindow.setImage(simulationImage);
         this.simulationWindow.setPanel(panel);

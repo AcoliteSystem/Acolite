@@ -1,7 +1,6 @@
 /*
  * AboutPanel.java
  *
- * Created on February 5, 2007, 10:00 AM
  */
 
 package eye.acolite;

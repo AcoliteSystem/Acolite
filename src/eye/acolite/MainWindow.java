@@ -1,7 +1,6 @@
 /*
  * MainWindow.java
  *
- * Created on February 5, 2007, 1:55 PM
  */
 
 package eye.acolite;
@@ -18,14 +17,14 @@ public class MainWindow extends javax.swing.JDialog {
     private eye.acolite.ImageDisplayWithPanel imageDisplayWithPanel;
 
     /** Creates new form MainWindow */
-    public MainWindow(java.awt.Frame parent, boolean modal, ColorOracle colorOracle) {
+    public MainWindow(java.awt.Frame parent, boolean modal, Acolite acolite) {
         super(parent, modal);
         
         this.setUndecorated(true);
         this.setResizable(false);
         
         // add a component to display the image.
-        imageDisplayWithPanel = new ImageDisplayWithPanel(colorOracle);
+        imageDisplayWithPanel = new ImageDisplayWithPanel(acolite);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         
         getContentPane().add(imageDisplayWithPanel, java.awt.BorderLayout.CENTER);

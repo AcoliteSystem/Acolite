@@ -1,12 +1,11 @@
 /*
  * Simulator.java
  *
- * Created on February 5, 2007, 11:22 AM
  *
  */
 package eye.acolite;
 
-import eye.acolite.ColorOracle.Simulation;
+import eye.acolite.Acolite.Simulation;
 import java.awt.RenderingHints;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;

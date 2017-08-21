@@ -1,7 +1,6 @@
 /*
  * ImageDisplayWithPanel.java
  *
- * Created on February 22, 2007, 3:16 PM
  *
  */
 
@@ -63,11 +62,11 @@ public class ImageDisplayWithPanel extends ImageDisplay
      * A reference to the controller of the application, which is used to hide
      * the main window if the user clicks outside the panel.
      */
-    private ColorOracle colorOracle;
+    private Acolite acolite;
     
     /** Creates a new instance of ImageDisplayWithPanel */
-    public ImageDisplayWithPanel(ColorOracle colorOracle) {
-        this.colorOracle = colorOracle;
+    public ImageDisplayWithPanel(Acolite acolite) {
+        this.acolite = acolite;
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
     }
@@ -114,7 +113,7 @@ public class ImageDisplayWithPanel extends ImageDisplay
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        this.colorOracle.switchToNormalVision();
+        this.acolite.switchToNormalVision();
     }
 
     @Override
@@ -125,7 +124,7 @@ public class ImageDisplayWithPanel extends ImageDisplay
             this.dragging = true;
         } else {
             this.dragging = false;
-            this.colorOracle.switchToNormalVision();
+            this.acolite.switchToNormalVision();
         }
     }
 
@@ -134,7 +133,7 @@ public class ImageDisplayWithPanel extends ImageDisplay
         if (this.dragging) {
             this.dragging = false;
         } else {
-            this.colorOracle.switchToNormalVision();
+            this.acolite.switchToNormalVision();
         }
     }
 

@@ -1,7 +1,6 @@
 /*
  * ImageDisplay.java
  *
- * Created on September 29, 2006, 10:01 AM
  *
  */
 
