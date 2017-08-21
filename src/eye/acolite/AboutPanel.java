@@ -22,7 +22,7 @@ public class AboutPanel extends javax.swing.JPanel {
         // Before the Desktop API is used (since VM 1.6), first check
         // whether the API is supported by this particular
         // virtual machine (VM) on this particular host.
-        this.homepageButton.setEnabled(Desktop.isDesktopSupported());
+        //this.homepageButton.setEnabled(Desktop.isDesktopSupported());
     }
     
     /** This method is called from within the constructor to
@@ -35,7 +35,6 @@ public class AboutPanel extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         javax.swing.JLabel textLabel = new javax.swing.JLabel();
-        homepageButton = new javax.swing.JButton();
         javax.swing.JLabel iconLabel = new javax.swing.JLabel();
         javax.swing.JLabel titleLabel = new javax.swing.JLabel();
         versionLabel = new javax.swing.JLabel();
@@ -43,24 +42,12 @@ public class AboutPanel extends javax.swing.JPanel {
         setLayout(new java.awt.GridBagLayout());
 
         textLabel.setFont(textLabel.getFont().deriveFont(textLabel.getFont().getSize()-2f));
-        textLabel.setText("<html><center>Version 1.2.1<br><br>Programming by<br> Bernhard Jenny<br> Oregon State University<br> <br> Ideas, Testing and Icon by<br> Nathaniel Vaughn Kelso,<br> Stamen Design.<br> <br> Copyright 2006-2012,<br> all rights reserved.<br> <br> For updates and further information see:<br></center></html>");
+        textLabel.setText("<html><center>Version 1.0<br>A Real-Time Software For Color Blind People<br><br>Created by<br>Evangelista, Maricone Ellis M. <br> Gloria, Marionne Grace J. <br> Mangaliag, Jenella Mae P. <br> Talens, Alyssa Venice G.<br>University of Santo Tomas<br> <br> Advised by<br> Sagum, Ria A.<br> <br> Copyright 2017,<br> all rights reserved.<br> <br></center></html>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(16, 21, 4, 21);
         add(textLabel, gridBagConstraints);
-
-        homepageButton.setText("http://colororacle.org");
-        homepageButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                homepageButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
-        add(homepageButton, gridBagConstraints);
 
         iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ika/icons/icon_big.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -68,7 +55,7 @@ public class AboutPanel extends javax.swing.JPanel {
         add(iconLabel, gridBagConstraints);
 
         titleLabel.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        titleLabel.setText("<html>Color Oracle</html>");
+        titleLabel.setText("<html>ACOLITE</html>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -83,22 +70,9 @@ public class AboutPanel extends javax.swing.JPanel {
         add(versionLabel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
     
-    /**
-     * Event handler for clicks on the home page button.
-     */
-    private void homepageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homepageButtonActionPerformed
-        try {
-            JButton button = (JButton)(evt.getSource());
-            URI uri = new URI(button.getText());            
-            Desktop.getDesktop().browse(uri);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_homepageButtonActionPerformed
-    
+   
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton homepageButton;
     private javax.swing.JLabel versionLabel;
     // End of variables declaration//GEN-END:variables
     

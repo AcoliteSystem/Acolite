@@ -1,7 +1,7 @@
 /*
- * ColorOraclerOracle.java
+ * Acolite.java
  *
- * Created on February 4, 2007, 10:20 PM
+ * 
  *
  */
 package eye.acolite;
@@ -12,8 +12,12 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -99,6 +103,11 @@ public class Acolite
      * The About menu item that will be added to the tray menu.
      */
     private MenuItem aboutMenuItem = new MenuItem();
+    /**
+     * A menu item for D-15 dichotomous test that will be added to the tray menu.
+     */
+    private MenuItem dichotomousTestMenuItem = new MenuItem();
+    
     private long timeOfLastClickOnTrayIcon = 0;
     private long timeOfLastFocusLost = 0;
 
@@ -125,7 +134,7 @@ public class Acolite
         }
 
         // set icon for JOptionPane dialogs, e.g. for error messages.
-        Acolite.setOptionPaneIcons("/eye/icons/icon48x48.png");
+        Acolite.setOptionPaneIcons("/ika/icons/icon48x48.png");
 
         // make sure screenshots are allowed by the security manager
         try {
@@ -195,7 +204,7 @@ public class Acolite
     }
 
     /**
-     * Loads a raster icon from the /eye/icons/ folder.
+     * Loads a raster icon from the /ika/icons/ folder.
      * @param name The name of the icon.
      * @description A description of the icon that is attached to it.
      * @return An ImageIcon.
@@ -203,7 +212,7 @@ public class Acolite
     public static ImageIcon loadImageIcon(String name, String description) {
 
         try {
-            String folder = "/eye/icons/";
+            String folder = "/ika/icons/";
             java.net.URL imgURL = Acolite.class.getResource(folder + name);
             if (imgURL != null) {
                 ImageIcon imageIcon = new ImageIcon(imgURL, description);
@@ -221,7 +230,7 @@ public class Acolite
     }
 
     /**
-     * Loads a raster icon from the /eye/icons/ folder.
+     * Loads a raster icon from the /ika/icons/ folder.
      * @param name The name of the icon.
      * @return The icon as Image object.
      **/
@@ -320,6 +329,31 @@ public class Acolite
         MenuItem quitMenuItem = new MenuItem();
 
         menu.setLabel("PopupMenu");
+        
+        
+        // D-15 dichotomous test
+        dichotomousTestMenuItem.setLabel("Take D-15 dichotomous test");
+        dichotomousTestMenuItem.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent event) {
+                URI uri = null;
+                try {
+                    uri = new URI("http://www.color-blindness.com/color-arrangement-test/");
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(Acolite.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Desktop dt = Desktop.getDesktop();
+                try {
+                    dt.browse(uri.resolve(uri));
+                } catch (IOException ex) {
+                    Logger.getLogger(Acolite.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+
+        });
+        menu.add(dichotomousTestMenuItem);
 
         // normal vision
         normalMenuItem.setLabel("Normal Vision");

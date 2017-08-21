@@ -23,7 +23,7 @@
             <Font component="textLabel" property="font" relativeSize="true" size="-2"/>
           </FontInfo>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Version 1.2.1&lt;br&gt;&lt;br&gt;Programming by&lt;br&gt; Bernhard Jenny&lt;br&gt; Oregon State University&lt;br&gt; &lt;br&gt; Ideas, Testing and Icon by&lt;br&gt; Nathaniel Vaughn Kelso,&lt;br&gt; Stamen Design.&lt;br&gt; &lt;br&gt; Copyright 2006-2012,&lt;br&gt; all rights reserved.&lt;br&gt; &lt;br&gt; For updates and further information see:&lt;br&gt;&lt;/center&gt;&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Version 1.0&lt;br&gt;A Real-Time Software For Color Blind People&lt;br&gt;&lt;br&gt;Created by&lt;br&gt;Evangelista, Maricone Ellis M. &lt;br&gt; Gloria, Marionne Grace J. &lt;br&gt; Mangaliag, Jenella Mae P. &lt;br&gt; Talens, Alyssa Venice G.&lt;br&gt;University of Santo Tomas&lt;br&gt; &lt;br&gt; Advised by&lt;br&gt; Sagum, Ria A.&lt;br&gt; &lt;br&gt; Copyright 2017,&lt;br&gt; all rights reserved.&lt;br&gt; &lt;br&gt;&lt;/center&gt;&lt;/html&gt;"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
@@ -32,19 +32,6 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
           <GridBagConstraints gridX="0" gridY="2" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="16" insetsLeft="21" insetsBottom="4" insetsRight="21" anchor="10" weightX="0.0" weightY="0.0"/>
-        </Constraint>
-      </Constraints>
-    </Component>
-    <Component class="javax.swing.JButton" name="homepageButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="http://colororacle.org"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="homepageButtonActionPerformed"/>
-      </Events>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-          <GridBagConstraints gridX="0" gridY="3" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="6" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -69,7 +56,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Lucida Grande" size="13" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Color Oracle&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;ACOLITE&lt;/html&gt;"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
