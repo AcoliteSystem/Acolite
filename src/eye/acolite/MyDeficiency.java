@@ -179,21 +179,21 @@ public class MyDeficiency extends javax.swing.JPanel {
 
     private void simulateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateButtonActionPerformed
         double angle, major, minor, tes, sIndex, cIndex;
+            angle = Double.parseDouble(angleField.getText());
+            major = Double.parseDouble(majorField.getText());
+            minor = Double.parseDouble(minorField.getText());
+            tes = Double.parseDouble(TESField.getText());
+            sIndex = Double.parseDouble(SIndexField.getText());
+            cIndex = Double.parseDouble(CIndexField.getText());
         
-        try {
-            angle = Double.parseDouble(this.angleField.getText());
-            major = Double.parseDouble(this.majorField.getText());
-            minor = Double.parseDouble(this.minorField.getText());
-            tes = Double.parseDouble(this.TESField.getText());
-            sIndex = Double.parseDouble(this.SIndexField.getText());
-            cIndex = Double.parseDouble(this.CIndexField.getText());
-        }
         
+        /*
         catch (Exception e){
-                JOptionPane.showMessageDialog(this, "Invalid Number",
+                JOptionPane.showMessageDialog(angle, "Invalid Number",
                         "Error", JOptionPane.ERROR_MESSAGE);
                 return;
         }
+        */
       
     }//GEN-LAST:event_simulateButtonActionPerformed
 

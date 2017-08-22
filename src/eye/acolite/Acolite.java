@@ -37,7 +37,7 @@ public class Acolite
     /**
      * The name of the icon that is placed in the task bar.
      */
-    private static final String MENUICON = "menuIcon.gif";
+    private static final String MENUICON = "menuIcon.png";
     /**
      * The information panel image for deuteranopia.
      */
@@ -1110,7 +1110,7 @@ public class Acolite
     }
     
    public class getValues extends JFrame {
-        private MyDeficiency deficiency;
+        MyDeficiency my = new MyDeficiency();
    
             public getValues(MyDeficiency deficiency) {
                int angle = Integer.parseInt(deficiency.angleFieldString());
