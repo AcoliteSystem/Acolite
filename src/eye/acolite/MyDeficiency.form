@@ -21,7 +21,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="minorField" alignment="0" min="-2" pref="275" max="-2" attributes="0"/>
                   <Component id="minorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="angleField1" min="-2" pref="275" max="-2" attributes="0"/>
+                  <Component id="angleField" min="-2" pref="275" max="-2" attributes="0"/>
                   <Component id="majorField" min="-2" pref="275" max="-2" attributes="0"/>
                   <Component id="majorLabel" min="-2" max="-2" attributes="0"/>
                   <Component id="angleLabel" min="-2" max="-2" attributes="0"/>
@@ -36,6 +36,11 @@
                   <Component id="TESLabel" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="266" max="-2" attributes="0"/>
+              <Component id="simulateButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,7 +65,7 @@
                   <Group type="102" attributes="0">
                       <Component id="angleLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="angleField1" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="angleField" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="majorLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -71,7 +76,9 @@
                       <Component id="minorField" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="55" max="32767" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <Component id="simulateButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,9 +99,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="majorFieldActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="angleField1">
+    <Component class="javax.swing.JTextField" name="angleField">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="angleField1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="angleFieldActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="minorLabel">
@@ -135,6 +142,14 @@
     <Component class="javax.swing.JTextField" name="CIndexField">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CIndexFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="simulateButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Simulate"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="simulateButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

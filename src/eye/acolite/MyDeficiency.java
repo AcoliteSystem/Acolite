@@ -5,6 +5,8 @@
 
 package eye.acolite;
 
+import javax.swing.JOptionPane;
+
 
 public class MyDeficiency extends javax.swing.JPanel {
     
@@ -23,7 +25,7 @@ public class MyDeficiency extends javax.swing.JPanel {
         angleLabel = new javax.swing.JLabel();
         majorLabel = new javax.swing.JLabel();
         majorField = new javax.swing.JTextField();
-        angleField1 = new javax.swing.JTextField();
+        angleField = new javax.swing.JTextField();
         minorLabel = new javax.swing.JLabel();
         minorField = new javax.swing.JTextField();
         TESLabel = new javax.swing.JLabel();
@@ -32,6 +34,7 @@ public class MyDeficiency extends javax.swing.JPanel {
         SIndexField = new javax.swing.JTextField();
         CIndexLabel = new javax.swing.JLabel();
         CIndexField = new javax.swing.JTextField();
+        simulateButton = new javax.swing.JButton();
 
         angleLabel.setText("Angle");
 
@@ -43,9 +46,9 @@ public class MyDeficiency extends javax.swing.JPanel {
             }
         });
 
-        angleField1.addActionListener(new java.awt.event.ActionListener() {
+        angleField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                angleField1ActionPerformed(evt);
+                angleFieldActionPerformed(evt);
             }
         });
 
@@ -81,6 +84,13 @@ public class MyDeficiency extends javax.swing.JPanel {
             }
         });
 
+        simulateButton.setText("Simulate");
+        simulateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simulateButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,7 +100,7 @@ public class MyDeficiency extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(minorField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(minorLabel)
-                    .addComponent(angleField1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(angleField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(majorField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(majorLabel)
                     .addComponent(angleLabel))
@@ -103,6 +113,10 @@ public class MyDeficiency extends javax.swing.JPanel {
                     .addComponent(SIndexLabel)
                     .addComponent(TESLabel))
                 .addGap(20, 20, 20))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(266, 266, 266)
+                .addComponent(simulateButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +138,7 @@ public class MyDeficiency extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(angleLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(angleField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(angleField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(majorLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -133,33 +147,80 @@ public class MyDeficiency extends javax.swing.JPanel {
                         .addComponent(minorLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(minorField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(simulateButton)
+                .addGap(25, 25, 25))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void majorFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_majorFieldActionPerformed
-        // TODO add your handling code here:
+        //String major = majorField.getText();
     }//GEN-LAST:event_majorFieldActionPerformed
 
-    private void angleField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_angleField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_angleField1ActionPerformed
+    private void angleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_angleFieldActionPerformed
+        //String angle = angleField.getText();
+    }//GEN-LAST:event_angleFieldActionPerformed
 
     private void minorFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minorFieldActionPerformed
-        // TODO add your handling code here:
+        //String minor = minorField.getText();
     }//GEN-LAST:event_minorFieldActionPerformed
 
     private void TESFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TESFieldActionPerformed
-        // TODO add your handling code here:
+        //String tes = TESField.getText();
     }//GEN-LAST:event_TESFieldActionPerformed
 
     private void SIndexFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SIndexFieldActionPerformed
-        // TODO add your handling code here:
+        //String sIndex = SIndexField.getText();
     }//GEN-LAST:event_SIndexFieldActionPerformed
 
     private void CIndexFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CIndexFieldActionPerformed
-        // TODO add your handling code here:
+        //String cIndex = CIndexField.getText();
     }//GEN-LAST:event_CIndexFieldActionPerformed
+
+    private void simulateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateButtonActionPerformed
+        double angle, major, minor, tes, sIndex, cIndex;
+        
+        try {
+            angle = Double.parseDouble(this.angleField.getText());
+            major = Double.parseDouble(this.majorField.getText());
+            minor = Double.parseDouble(this.minorField.getText());
+            tes = Double.parseDouble(this.TESField.getText());
+            sIndex = Double.parseDouble(this.SIndexField.getText());
+            cIndex = Double.parseDouble(this.CIndexField.getText());
+        }
+        
+        catch (Exception e){
+                JOptionPane.showMessageDialog(this, "Invalid Number",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+        }
+      
+    }//GEN-LAST:event_simulateButtonActionPerformed
+
+  
+    public String angleFieldString() {
+      return angleField.getText();
+    }
+    
+    public String majorFieldString() {
+      return majorField.getText();
+    }
+    
+    public String minorFieldString() {
+      return minorField.getText();
+    }
+    
+    public String TESFieldString() {
+      return TESField.getText();
+    }
+    
+    public String sIndexFieldString() {
+      return SIndexField.getText();
+    }
+    
+    public String cIndexFieldString() {
+      return CIndexField.getText();
+    }
     
    
     
@@ -170,12 +231,13 @@ public class MyDeficiency extends javax.swing.JPanel {
     private javax.swing.JLabel SIndexLabel;
     private javax.swing.JTextField TESField;
     private javax.swing.JLabel TESLabel;
-    private javax.swing.JTextField angleField1;
+    private javax.swing.JTextField angleField;
     private javax.swing.JLabel angleLabel;
     private javax.swing.JTextField majorField;
     private javax.swing.JLabel majorLabel;
     private javax.swing.JTextField minorField;
     private javax.swing.JLabel minorLabel;
+    private javax.swing.JButton simulateButton;
     // End of variables declaration//GEN-END:variables
     
 }

@@ -1108,6 +1108,25 @@ public class Acolite
             return selFile.getPath();
         }
     }
+    
+   public class getValues extends JFrame {
+        private MyDeficiency deficiency;
+   
+            public getValues(MyDeficiency deficiency) {
+               int angle = Integer.parseInt(deficiency.angleFieldString());
+               int major = Integer.parseInt(deficiency.majorFieldString());
+               int minor = Integer.parseInt(deficiency.minorFieldString());
+               int tes = Integer.parseInt(deficiency.TESFieldString());
+               int sIndex = Integer.parseInt(deficiency.sIndexFieldString());
+               int cIndex = Integer.parseInt(deficiency.cIndexFieldString());
+               
+               
+               if (angle > 0.7){
+                   simulate(Acolite.Simulation.deutan);
+               }
+               
+             }
+   }
 
     /**
      * Makes sure that a given name of a file has a certain file extension.<br>
