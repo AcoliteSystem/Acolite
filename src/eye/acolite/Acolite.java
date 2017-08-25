@@ -1113,13 +1113,12 @@ public class Acolite
         MyDeficiency my = new MyDeficiency();
    
             public getValues(MyDeficiency deficiency) {
-               double angle = deficiency.angleFieldString();
-               double major = deficiency.majorFieldString();
-               double minor = deficiency.minorFieldString();
-               double tes = deficiency.TESFieldString();
-               double sIndex = deficiency.sIndexFieldString();
-               double cIndex = deficiency.cIndexFieldString();
-               
+               double angle = deficiency.angleField();
+               double major = deficiency.majorField();
+               double minor = deficiency.minorField();
+               double tes = deficiency.TESField();
+               double sIndex = deficiency.sIndexField();
+               double cIndex = deficiency.cIndexField();
                
                if (angle > 0.7){
                    simulate(Acolite.Simulation.deutan);

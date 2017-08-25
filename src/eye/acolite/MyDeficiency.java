@@ -5,7 +5,6 @@
 
 package eye.acolite;
 
-import javax.swing.JOptionPane;
 
 
 public class MyDeficiency extends javax.swing.JPanel {
@@ -184,7 +183,7 @@ public class MyDeficiency extends javax.swing.JPanel {
             tes = Double.parseDouble(TESField.getText());
             sIndex = Double.parseDouble(SIndexField.getText());
             cIndex = Double.parseDouble(CIndexField.getText());
-             setVisible(false);
+            setVisible(false);
         
             /*
         catch (Exception e){
@@ -195,32 +194,32 @@ public class MyDeficiency extends javax.swing.JPanel {
         */     
     }//GEN-LAST:event_simulateButtonActionPerformed
 
-    public double angleFieldString() {
+    public double angleField() {
       setVisible(true);
       return angle;
     }
     
-    public double majorFieldString() {
+    public double majorField() {
       setVisible(true);
       return major;
     }
     
-    public double minorFieldString() {
+    public double minorField() {
       setVisible(true);
       return minor;
     }
     
-    public double TESFieldString() {
+    public double TESField() {
       setVisible(true);
       return tes;
     }
     
-    public double sIndexFieldString() {
+    public double sIndexField() {
       setVisible(true);
       return sIndex;
     }
     
-    public double cIndexFieldString() {
+    public double cIndexField() {
       setVisible(true);
       return cIndex;
     }
