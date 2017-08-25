@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 
 public class MyDeficiency extends javax.swing.JPanel {
-    
+    double angle, major, minor, tes, sIndex, cIndex;
     public MyDeficiency() {
         initComponents();
     }
@@ -178,51 +178,52 @@ public class MyDeficiency extends javax.swing.JPanel {
     }//GEN-LAST:event_CIndexFieldActionPerformed
 
     private void simulateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateButtonActionPerformed
-        double angle, major, minor, tes, sIndex, cIndex;
             angle = Double.parseDouble(angleField.getText());
             major = Double.parseDouble(majorField.getText());
             minor = Double.parseDouble(minorField.getText());
             tes = Double.parseDouble(TESField.getText());
             sIndex = Double.parseDouble(SIndexField.getText());
             cIndex = Double.parseDouble(CIndexField.getText());
+             setVisible(false);
         
-        
-        /*
+            /*
         catch (Exception e){
                 JOptionPane.showMessageDialog(angle, "Invalid Number",
                         "Error", JOptionPane.ERROR_MESSAGE);
                 return;
         }
-        */
-      
+        */     
     }//GEN-LAST:event_simulateButtonActionPerformed
 
-  
-    public String angleFieldString() {
-      return angleField.getText();
+    public double angleFieldString() {
+      setVisible(true);
+      return angle;
     }
     
-    public String majorFieldString() {
-      return majorField.getText();
+    public double majorFieldString() {
+      setVisible(true);
+      return major;
     }
     
-    public String minorFieldString() {
-      return minorField.getText();
+    public double minorFieldString() {
+      setVisible(true);
+      return minor;
     }
     
-    public String TESFieldString() {
-      return TESField.getText();
+    public double TESFieldString() {
+      setVisible(true);
+      return tes;
     }
     
-    public String sIndexFieldString() {
-      return SIndexField.getText();
+    public double sIndexFieldString() {
+      setVisible(true);
+      return sIndex;
     }
     
-    public String cIndexFieldString() {
-      return CIndexField.getText();
+    public double cIndexFieldString() {
+      setVisible(true);
+      return cIndex;
     }
-    
-   
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CIndexField;

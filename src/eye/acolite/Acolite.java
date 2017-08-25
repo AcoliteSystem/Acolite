@@ -1113,12 +1113,12 @@ public class Acolite
         MyDeficiency my = new MyDeficiency();
    
             public getValues(MyDeficiency deficiency) {
-               int angle = Integer.parseInt(deficiency.angleFieldString());
-               int major = Integer.parseInt(deficiency.majorFieldString());
-               int minor = Integer.parseInt(deficiency.minorFieldString());
-               int tes = Integer.parseInt(deficiency.TESFieldString());
-               int sIndex = Integer.parseInt(deficiency.sIndexFieldString());
-               int cIndex = Integer.parseInt(deficiency.cIndexFieldString());
+               double angle = deficiency.angleFieldString();
+               double major = deficiency.majorFieldString();
+               double minor = deficiency.minorFieldString();
+               double tes = deficiency.TESFieldString();
+               double sIndex = deficiency.sIndexFieldString();
+               double cIndex = deficiency.cIndexFieldString();
                
                
                if (angle > 0.7){
