@@ -184,7 +184,8 @@ public class MyDeficiency extends javax.swing.JPanel {
             sIndex = Double.parseDouble(SIndexField.getText());
             cIndex = Double.parseDouble(CIndexField.getText());
             setVisible(false);
-        
+            
+            
             /*
         catch (Exception e){
                 JOptionPane.showMessageDialog(angle, "Invalid Number",
