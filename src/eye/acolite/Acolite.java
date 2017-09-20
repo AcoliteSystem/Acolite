@@ -41,15 +41,15 @@ public class Acolite
     /**
      * The information panel image for deuteranopia.
      */
-    private Image deutanPanel = loadImage("deutanpanel.png");
+    private Image deutanPanel = loadImage("");
     /**
      * The information panel image for protanopia.
      */
-    private Image protanPanel = loadImage("protanpanel.png");
+    private Image protanPanel = loadImage("");
     /**
      * The information panel image for tritanopia.
      */
-    private Image tritanPanel = loadImage("tritanpanel.png");
+    private Image tritanPanel = loadImage("");
     /**
      * Wait a few milliseconds before taking a screenshot until the menu has 
      * faded out.
