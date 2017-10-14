@@ -5,10 +5,45 @@
 
 package eye.acolite;
 
+import static eye.acolite.Acolite.forceFileNameExtension;
+import static eye.acolite.Acolite.loadImage;
+import java.awt.BorderLayout;
+import java.awt.CheckboxMenuItem;
+import java.awt.Image;
+import java.awt.MenuItem;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 
 
 public class MyDeficiency extends javax.swing.JPanel {
     double angle, major, minor, tes, sIndex, cIndex;
+    private Acolite.Simulation currentSimulation = Acolite.Simulation.normal;
+    private Simulator simulator = new Simulator();
+    private Image deutanPanel= loadImage("deutanpanel.png");
+    private Image protanPanel= loadImage("protanpanel.png");
+    private Image tritanPanel= loadImage("tritanpanel.png");
+    private boolean currentlySavingImage = false;
+    private CheckboxMenuItem normalMenuItem = new CheckboxMenuItem();
+    private CheckboxMenuItem deutanMenuItem = new CheckboxMenuItem();
+    private CheckboxMenuItem protanMenuItem = new CheckboxMenuItem();
+    private CheckboxMenuItem tritanMenuItem = new CheckboxMenuItem();
+    private MenuItem saveMenuItem = new MenuItem();
+    private MenuItem aboutMenuItem = new MenuItem();
+    private MenuItem dichotomousTestMenuItem = new MenuItem();
+    private MenuItem myDeficiencyMenuItem = new MenuItem();
+    private static final long SLEEP_BEFORE_SCREENSHOT_MILLISECONDS = 300;
+    enum Simulation {
+
+        normal, deutan, protan, tritan
+    }
+    
     public MyDeficiency() {
         initComponents();
     }
@@ -183,48 +218,24 @@ public class MyDeficiency extends javax.swing.JPanel {
             tes = Double.parseDouble(TESField.getText());
             sIndex = Double.parseDouble(SIndexField.getText());
             cIndex = Double.parseDouble(CIndexField.getText());
-            setVisible(false);
             
+        try {
+              //angles
+              if (angle > 0.7){
+                   simulate(Acolite.Simulation.protan);
+              }
+              else if(angle < 0.7 && angle > -65){
+                   simulate(Acolite.Simulation.deutan);
+              }
+              else if(angle < -65){
+                   simulate(Acolite.Simulation.tritan);
+              }
+        } catch (Exception ex) {
             
-            /*
-        catch (Exception e){
-                JOptionPane.showMessageDialog(angle, "Invalid Number",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-                return;
         }
-        */     
+            
     }//GEN-LAST:event_simulateButtonActionPerformed
-
-    public double angleField() {
-      setVisible(true);
-      return angle;
-    }
-    
-    public double majorField() {
-      setVisible(true);
-      return major;
-    }
-    
-    public double minorField() {
-      setVisible(true);
-      return minor;
-    }
-    
-    public double TESField() {
-      setVisible(true);
-      return tes;
-    }
-    
-    public double sIndexField() {
-      setVisible(true);
-      return sIndex;
-    }
-    
-    public double cIndexField() {
-      setVisible(true);
-      return cIndex;
-    }
-    
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CIndexField;
     private javax.swing.JLabel CIndexLabel;
@@ -240,5 +251,214 @@ public class MyDeficiency extends javax.swing.JPanel {
     private javax.swing.JLabel minorLabel;
     private javax.swing.JButton simulateButton;
     // End of variables declaration//GEN-END:variables
+
+    private void simulate(Acolite.Simulation simulationType) {
+        try {
+            // remember the current simulation
+            this.currentSimulation = simulationType;
+
+            this.updateMenuState();
+
+            // take a screenshot, simulate and show the result
+            this.simulator.simulate(simulationType);
+            switch (simulationType) {
+                case deutan:
+                    this.simulateAndShow(this.deutanPanel);
+                    break;
+                case protan:
+                    this.simulateAndShow(this.protanPanel);
+                    break;
+                case tritan:
+                    this.simulateAndShow(this.tritanPanel);
+                    break;
+            }
+        } catch (Exception exc) {
+            exc.printStackTrace();
+            this.switchToNormalVision();
+        }
+    }
     
+    private void updateMenuState() {
+
+        // make sure only one menu item is checked
+        this.normalMenuItem.setState(this.currentSimulation == Acolite.Simulation.normal);
+        this.deutanMenuItem.setState(this.currentSimulation == Acolite.Simulation.deutan);
+        this.protanMenuItem.setState(this.currentSimulation == Acolite.Simulation.protan);
+        this.tritanMenuItem.setState(this.currentSimulation == Acolite.Simulation.tritan);
+
+        // disable menu items if the Save dialog is in the foreground.
+        this.normalMenuItem.setEnabled(!this.currentlySavingImage);
+        this.deutanMenuItem.setEnabled(!this.currentlySavingImage);
+        this.protanMenuItem.setEnabled(!this.currentlySavingImage);
+        this.tritanMenuItem.setEnabled(!this.currentlySavingImage);
+        this.aboutMenuItem.setEnabled(!this.currentlySavingImage);
+
+        // Save item is disabled when we are not currently showing a simulation.
+        // It is also disabled when the save-as dialog is currently open.
+        this.saveMenuItem.setEnabled(this.currentSimulation != Acolite.Simulation.normal && !this.currentlySavingImage);
+
+        // change the title of the save item to the current simulation.
+        String saveMenuLabel;
+        if (this.currentSimulation != Acolite.Simulation.normal) {
+            saveMenuLabel = "Save " + this.currentSimulationName() + " Image...";
+        } else {
+            saveMenuLabel = "Save Filtered Screen Image...";
+        }
+        this.saveMenuItem.setLabel(saveMenuLabel);
+    }
+    
+
+private void simulateAndShow(Image panel) {
+
+        try {
+            // wait for a few milliseconds until the menu has faded out.
+            Thread.sleep(SLEEP_BEFORE_SCREENSHOT_MILLISECONDS);
+
+            final boolean simulationVisible = Screen.getScreens().size() > 0;
+
+            // detect all attached screens
+            if (!simulationVisible) {
+                Screen.detectScreens();
+            }
+
+            // simulate color-impaired vision for all attached screens
+            for (Screen screen : Screen.getScreens()) {
+
+                // don't take a screenshot when a color-impaired simulation 
+                // is currently visible. Instead, use the same screenshot again.
+                if (!simulationVisible) {
+                    screen.takeScreenshot();
+                }
+
+                // apply a simulation filter to the screenshot
+                BufferedImage img = this.simulator.filter(screen.screenshotImage);
+                //img = computeDifference(img, screen.screenshotImage);
+
+                // ImageIO.write(img, "png", new File("screen" + Screen.getScreens().indexOf(screen) + ".png"));
+
+                // show the result of the simulation in a window
+                screen.showSimulationImageMyD(img, this, panel);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                this.switchToNormalVision();
+            } catch (Exception exc) {
+            }
+            showErrorMessage(e.getMessage(), false);
+            e.printStackTrace();
+        }
+
+    }
+
+public void switchToNormalVision() {
+        // remember the current simulation
+        this.currentSimulation = Acolite.Simulation.normal;
+
+        this.updateMenuState();
+
+        // hide the window
+        this.hideSimulation();
+    }
+private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+        this.currentlySavingImage = true;
+        try {
+
+            // first get the simulation image
+            int screenID = 0; // default is the first screen
+            final int screenCount = Screen.getScreens().size();
+            if (screenCount > 1) {
+                // ask the user for the screen to save when there is more than one
+                ArrayList<String> screenNames = new ArrayList<String>(screenCount);
+                for (int i = 1; i <= screenCount; i++) {
+                    screenNames.add("Screen " + i);
+                }
+                String screenName = (String) JOptionPane.showInputDialog(null,
+                        "Select a Screen:",
+                        "Save Filtered Screen Image",
+                        JOptionPane.QUESTION_MESSAGE, null,
+                        screenNames.toArray(), null);
+                if (screenName == null) {
+                    return; // user canceled
+                }
+                screenID = screenNames.indexOf(screenName);
+            }
+            Image simImg = Screen.getScreens().get(screenID).simulationWindow.getImage();
+
+            // then hide and release the simulation windows
+            this.hideSimulation();
+            if (simImg == null) {
+                throw new Exception("No image to save.");
+            }
+
+            // construct file name
+            String fileName = this.currentSimulationName() + ".png";
+
+            // disable menu items
+            this.updateMenuState();
+
+            // ask user for file to save the image
+            String filePath = Acolite.askFile(null, "Save Image", fileName, false);
+            if (filePath == null) {
+                return;
+            }
+
+            // make sure the file has a png extension.
+            filePath = forceFileNameExtension(filePath, "png");
+
+            // write the image to a file
+            ImageIO.write((BufferedImage) simImg, "png", new File(filePath));
+        } catch (Exception e) {
+            this.hideSimulation();
+            e.printStackTrace();
+            String msg = "An unexpected error occurred. \n" + e.getMessage();
+            String title = "Acolite Error";
+            javax.swing.JOptionPane.showMessageDialog(null, msg, title,
+                    javax.swing.JOptionPane.ERROR_MESSAGE, null);
+        } finally {
+            this.currentlySavingImage = false;
+
+            // re-enable menu items
+            this.currentSimulation = Acolite.Simulation.normal;
+            this.updateMenuState();
+        }
+    }
+
+private String currentSimulationName() {
+        switch (this.currentSimulation) {
+            case deutan:
+                return "Deuteranopia";
+            case protan:
+                return "Protanopia";
+            case tritan:
+                return "Tritanopia";
+            default:
+                return "";
+        }
+    }
+private void hideSimulation() {
+
+        for (Screen screen : Screen.getScreens()) {
+            screen.hideSimulation();
+        }
+        Screen.getScreens().clear();
+
+    }
+
+static void showErrorMessage(String msg, boolean showExitButton) {
+
+        if (msg == null || msg.trim().length() < 3) {
+            msg = "An error occurred.";
+        } else {
+            msg = msg.trim();
+        }
+        String title = "Acolite Error";
+        Object[] options = new Object[]{"Exit Acolite"};
+        javax.swing.JOptionPane.showOptionDialog(null, msg, title,
+                JOptionPane.DEFAULT_OPTION,
+                javax.swing.JOptionPane.ERROR_MESSAGE,
+                null,
+                showExitButton ? options : null,
+                showExitButton ? options[0] : null);
+    }
 }
