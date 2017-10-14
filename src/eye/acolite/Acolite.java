@@ -207,7 +207,7 @@ public class Acolite
     /**
      * Constructor of Acolite. Initializes the tray icon and its menu.
      */
-    private Acolite() throws Exception {
+    Acolite() throws Exception {
         this.initTrayIcon();
     }
 
@@ -701,7 +701,7 @@ public class Acolite
 
     }
 
-    private static void showErrorMessage(String msg, boolean showExitButton) {
+    static void showErrorMessage(String msg, boolean showExitButton) {
 
         if (msg == null || msg.trim().length() < 3) {
             msg = "An error occurred.";
@@ -1109,23 +1109,6 @@ public class Acolite
         }
     }
     
-   public class getValues extends JFrame {
-        MyDeficiency my = new MyDeficiency();
-   
-            public getValues(MyDeficiency deficiency) {
-               double angle = deficiency.angleField();
-               double major = deficiency.majorField();
-               double minor = deficiency.minorField();
-               double tes = deficiency.TESField();
-               double sIndex = deficiency.sIndexField();
-               double cIndex = deficiency.cIndexField();
-               
-               if (angle > 0.7){
-                   simulate(Acolite.Simulation.deutan);
-               }
-               
-             }
-   }
 
     /**
      * Makes sure that a given name of a file has a certain file extension.<br>
