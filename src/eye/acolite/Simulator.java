@@ -123,6 +123,9 @@ public class Simulator {
             int[] inData = inBuffer.getData();
             int[] outData = outBuffer.getData();
 
+            int mred=0, mgreen = 0, mblue=0;
+            float dR=0, dG=0, dB = 0;
+            
             int prevIn = 0;
             int prevOut = 0;
             final int length = inData.length;
@@ -135,12 +138,35 @@ public class Simulator {
                     final int r = (0xff0000 & in) >> 16;
                     final int g = (0xff00 & in) >> 8;
                     final int b = 0xff & in;
-
+                    
                     // get linear rgb values in the range 0..2^15-1
                     final int r_lin = rgb2lin_red_LUT[r];
                     final int g_lin = rgb2lin_red_LUT[g];
                     final int b_lin = rgb2lin_red_LUT[b];
+                    
+                    // remove information associated with the M cone and replace it 
+                    //with  information  perceived  by  L  and  S  cones
+                    if(k1==9591 && k2==23173){
+                        //https://stacks.stanford.edu/file/druid:yj296hj2790/Woods_Assisting_Color_Blind_Viewers.pdf
+                        float dL = (1 * (r_lin) + 0 * (g_lin) + 0 * b_lin);
+                        float dM = (0.49421f * (r_lin) + 0 * (g_lin) + 1.24827f * b_lin);
+                        float dS = (0 * (r_lin) + 0 * (g_lin) + 1 * b_lin);
 
+                        dR = (1 * (dL) + 0 * (dM) + 0 * dS);
+                        dG = (0.49421f * (dL) + 0 * (dM) + 1.24827f * dS);
+                        dB = (0 * (dL) + 0 * (dM) + 1 * dS);
+                    }
+                    
+                    if(k1==3683 && k2==29084){
+                        //https://journal.utem.edu.my/index.php/jtec/article/download/1406/918
+                        float dL = (17.8824f * (r_lin) + 43.5161f * (g_lin) + 4.11935f * b_lin);
+                        float dM = (3.45565f* (r_lin) +  27.1554f * (g_lin) + 386714f * b_lin);
+                        float dS = (0.29956f * (r_lin) + 0.184309f * (g_lin) + 1.46709f * b_lin);
+
+                        dR = (0 * (dL) + 43.5161f * (dM) + 4.11935f * dS);
+                        dG = (0 * (dL) + 1 * (dM) + 0 * dS);
+                        dB = (0 * (dL) + 0 * (dM) + 1 * dS);
+                    }
                     // simulated red and green are identical
                     // scale the matrix values to 0..2^15 for integer computations 
                     // of the simulated protan values.
@@ -151,6 +177,7 @@ public class Simulator {
                     int r_blind = (int) (k1 * r_lin + k2 * g_lin) >> 22;
                     int b_blind = (int) (k3 * r_lin - k3 * g_lin + 32768 * b_lin) >> 22;
 
+                    
                     if (r_blind < 0) {
                         r_blind = 0;
                     } else if (r_blind > 255) {
@@ -169,8 +196,33 @@ public class Simulator {
                     int blue = lin2rgb_LUT[b_blind];
                     blue = blue >= 0 ? blue : 256 + blue;   // from unsigned to signed
 
-                    final int out = 0xff000000 | red << 16 | red << 8 | blue;
-
+                    if(k1==9591 && k2==23173){
+                        //compensate deuteranopia with LMS Daltonization
+                        mred = (int) (1 * (dR) + 0.7 * (dG) + 0 * dB);
+                        mgreen= (int)(0 * (dR) + 0 * (dG) + 0 * dB); 
+                        mblue = (int)(0 * (dR) + 0.7 * (dG) + 1 * dB);
+                    }
+                    else if(k1==3683 && k2==29084){
+                        //compensate protanopia with LMS Daltonization
+                        mred = (int) (0 * (dR) + 0 * (dG) + 0 * dB);
+                        mgreen= (int)(0.7 * (dR) + 1 * (dG) + 0 * dB); 
+                        mblue = (int)(0.7 * (dR) + 0 * (dG) + 1 * dB); 
+                    }
+                    //no changes in white
+                    if(r==255 && g==255 && b==255){
+                        mred = 0;
+                        mgreen = 0;
+                        mblue = 0;
+                    }
+                    //no changes in black
+                    if(r==0 && g==0 && b==0){
+                        mred = 0;
+                        mgreen = 0;
+                        mblue = 0;
+                    }
+                    
+                    final int out = 0xff000000 | (r << 16) + mred | (g << 8) + mgreen | b;
+                    
                     outData[i] = out;
                     prevIn = in;
                     prevOut = out;
@@ -299,8 +351,8 @@ public class Simulator {
                     int igreen = (int) (255.f * (-L * 6.481468f
                             + M * 17.715578f - S * 2.532642f));
                     int iblue = (int) (255.f * (-L * 0.375690f
-                            - M * 1.199062f + S * 14.273846f));
-
+                            - M * 1.199062f + S * 14.273846f));                              
+                    
                     // convert reduced linear rgb to gamma corrected rgb
                     if (ired < 0) {
                         ired = 0;
@@ -327,8 +379,26 @@ public class Simulator {
                         iblue = iblue >= 0 ? iblue : 256 + iblue; // from unsigned to signed
                     }
 
-                    final int out = (int) (ired << 16 | igreen << 8 | iblue | 0xff000000);
-
+                    //compensate tritanopia with LMS Daltonization
+                    int mred = (int) (1 * (ired) + 0 * (igreen) + 0.7 * iblue);
+                    int mgreen= (int)(0 * (ired) + 1 * (igreen) + 0.7 * iblue); 
+                    int mblue = (int)(0 * (ired) + 0 * (igreen) + 0 * iblue);                
+                    
+                    //no changes in white
+                    if(r==255 && g==255 && b==255){
+                        mred = 0;
+                        mgreen = 0;
+                        mblue = 0;
+                    }
+                    //no changes in black
+                    if(r==0 && g==0 && b==0){
+                        mred = 0;
+                        mgreen = 0;
+                        mblue = 0;
+                    }
+                    //add shifted values to original image
+                    final int out = (int) ( (ired >> 16)| (igreen >> 8) | iblue | 0xff000000);
+                    
                     outData[i] = out;
                     prevIn = in;
                     prevOut = out;
@@ -371,5 +441,4 @@ public class Simulator {
             return null;
         }
     }
-    
 }
