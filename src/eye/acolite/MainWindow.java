@@ -31,6 +31,21 @@ public class MainWindow extends javax.swing.JDialog {
 
         pack();
     }
+       
+    public MainWindow(java.awt.Frame parent, boolean modal, MyDeficiency my) {
+        super(parent, modal);
+        
+        this.setUndecorated(true);
+        this.setResizable(false);
+        
+        // add a component to display the image.
+        imageDisplayWithPanel = new ImageDisplayWithPanel(my);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        
+        getContentPane().add(imageDisplayWithPanel, java.awt.BorderLayout.CENTER);
+
+        pack();
+    }
     
     /**
      * Set the image to display.
