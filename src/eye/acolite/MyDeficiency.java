@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 
 
 public class MyDeficiency extends javax.swing.JPanel {
-    double angle, major, minor, tes, sIndex, cIndex;
+    double angle, tes, sIndex, cIndex;
     private Acolite.Simulation currentSimulation = Acolite.Simulation.normal;
     private Simulator simulator = new Simulator();
     private Image deutanPanel= loadImage("deutanpanel.png");
@@ -57,11 +57,7 @@ public class MyDeficiency extends javax.swing.JPanel {
     private void initComponents() {
 
         angleLabel = new javax.swing.JLabel();
-        majorLabel = new javax.swing.JLabel();
-        majorField = new javax.swing.JTextField();
         angleField = new javax.swing.JTextField();
-        minorLabel = new javax.swing.JLabel();
-        minorField = new javax.swing.JTextField();
         TESLabel = new javax.swing.JLabel();
         TESField = new javax.swing.JTextField();
         SIndexLabel = new javax.swing.JLabel();
@@ -69,28 +65,14 @@ public class MyDeficiency extends javax.swing.JPanel {
         CIndexLabel = new javax.swing.JLabel();
         CIndexField = new javax.swing.JTextField();
         simulateButton = new javax.swing.JButton();
+        TitleLabel = new javax.swing.JLabel();
+        WarningLabel = new javax.swing.JLabel();
 
         angleLabel.setText("Angle");
-
-        majorLabel.setText("Major");
-
-        majorField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                majorFieldActionPerformed(evt);
-            }
-        });
 
         angleField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 angleFieldActionPerformed(evt);
-            }
-        });
-
-        minorLabel.setText("Minor");
-
-        minorField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                minorFieldActionPerformed(evt);
             }
         });
 
@@ -118,12 +100,14 @@ public class MyDeficiency extends javax.swing.JPanel {
             }
         });
 
-        simulateButton.setText("Simulate");
+        simulateButton.setText("Correct");
         simulateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 simulateButtonActionPerformed(evt);
             }
         });
+
+        TitleLabel.setText("D-15 dichotomous test results");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -132,72 +116,66 @@ public class MyDeficiency extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(minorField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(minorLabel)
-                    .addComponent(angleField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(majorField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(majorLabel)
-                    .addComponent(angleLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CIndexField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CIndexLabel)
-                    .addComponent(TESField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SIndexField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SIndexLabel)
-                    .addComponent(TESLabel))
-                .addGap(20, 20, 20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SIndexLabel)
+                            .addComponent(angleField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(angleLabel)
+                            .addComponent(TESLabel)
+                            .addComponent(TESField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SIndexField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(26, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CIndexField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CIndexLabel))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(266, 266, 266)
-                .addComponent(simulateButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(TitleLabel))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(116, 116, 116)
+                            .addComponent(simulateButton))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(70, 70, 70)
+                            .addComponent(WarningLabel))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(TESLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TESField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(SIndexLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SIndexField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(CIndexLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CIndexField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(angleLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(angleField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(majorLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(majorField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(minorLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(minorField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(TitleLabel)
+                .addGap(18, 18, 18)
+                .addComponent(angleLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(angleField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TESLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TESField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(SIndexLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SIndexField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CIndexLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CIndexField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(WarningLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(simulateButton)
-                .addGap(25, 25, 25))
+                .addGap(22, 22, 22))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void majorFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_majorFieldActionPerformed
-        //String major = majorField.getText();
-    }//GEN-LAST:event_majorFieldActionPerformed
 
     private void angleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_angleFieldActionPerformed
         //String angle = angleField.getText();
     }//GEN-LAST:event_angleFieldActionPerformed
-
-    private void minorFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minorFieldActionPerformed
-        //String minor = minorField.getText();
-    }//GEN-LAST:event_minorFieldActionPerformed
 
     private void TESFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TESFieldActionPerformed
         //String tes = TESField.getText();
@@ -212,28 +190,49 @@ public class MyDeficiency extends javax.swing.JPanel {
     }//GEN-LAST:event_CIndexFieldActionPerformed
 
     private void simulateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateButtonActionPerformed
+            try {
             angle = Double.parseDouble(angleField.getText());
-            major = Double.parseDouble(majorField.getText());
-            minor = Double.parseDouble(minorField.getText());
             tes = Double.parseDouble(TESField.getText());
             sIndex = Double.parseDouble(SIndexField.getText());
             cIndex = Double.parseDouble(CIndexField.getText());
             
-        try {
-              //angles
-              if (angle > 0.7){
+            //Confusion Angles
+              //normal color vision or slightly colorblind persons have a ratio below 1.2
+              if (angle < 66 && angle > 53 && cIndex < 1.2){
+                   simulate(Acolite.Simulation.normal);
+              }
+              //0.7 and up -- protan
+              else if (angle > 0.7){
                    simulate(Acolite.Simulation.protan);
               }
+              //between -6 and 0.7 -- deutan
               else if(angle < 0.7 && angle > -65){
                    simulate(Acolite.Simulation.deutan);
               }
+              //below -65  -- tritan
               else if(angle < -65){
                    simulate(Acolite.Simulation.tritan);
               }
-        } catch (Exception ex) {
             
-        }
+            //C-Index  
+              if (cIndex < 20 && cIndex > 11){
+                  //mild -- strong
+              }
+              
+              if (cIndex < 30 && cIndex > 20){
+                  //moderate -- strong
+              }
+              
+              if (cIndex < 40 && cIndex > 30){
+                  //moderate -- strong
+              }
+            } 
+            catch (NumberFormatException e) {
+                showErrorMessage(e.getMessage(), false);
+            }
             
+          
+          
     }//GEN-LAST:event_simulateButtonActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -243,15 +242,17 @@ public class MyDeficiency extends javax.swing.JPanel {
     private javax.swing.JLabel SIndexLabel;
     private javax.swing.JTextField TESField;
     private javax.swing.JLabel TESLabel;
+    private javax.swing.JLabel TitleLabel;
+    private javax.swing.JLabel WarningLabel;
     private javax.swing.JTextField angleField;
     private javax.swing.JLabel angleLabel;
-    private javax.swing.JTextField majorField;
-    private javax.swing.JLabel majorLabel;
-    private javax.swing.JTextField minorField;
-    private javax.swing.JLabel minorLabel;
     private javax.swing.JButton simulateButton;
     // End of variables declaration//GEN-END:variables
 
+     public String cIndexFieldString() {
+            return CIndexField.getText();
+        }   
+    
     private void simulate(Acolite.Simulation simulationType) {
         try {
             // remember the current simulation
